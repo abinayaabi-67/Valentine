@@ -1,0 +1,209 @@
+:root {
+  --rose: #b71c1c;
+  --rose-light: #ef5350;
+  --rose-deep: #8b0000;
+  --dark-pink: #ad1457;
+  --dark-pink-light: #c2185b;
+  --cream: #ffebee;
+  --cream-dark: #ffcdd2;
+  --gold: #c62828;
+  --chocolate: #1b0a0a;
+  --blush: #ef9a9a;
+  font-family: "Quicksand", system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--chocolate);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 235, 238, 0.5) 0%,
+    rgba(255, 205, 210, 0.4) 50%,
+    rgba(255, 235, 238, 0.55) 100%
+  );
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("/background-overall.jpg") center / cover no-repeat;
+  opacity: 0.5; /* 👈 Reduce this value (0.1 – 0.5) */
+  z-index: -1;
+}
+
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 0.75rem;
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+}
+
+/* Floating hearts background */
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-hearts span {
+  position: absolute;
+  font-size: clamp(1rem, 3vw, 1.75rem);
+  opacity: 0.5;
+  top: -0.5em;
+  will-change: transform;
+}
+
+/* Move stars: drift left */
+.floating-hearts span:nth-child(odd) {
+  animation: floatDriftLeft 14s ease-in-out infinite;
+}
+.floating-hearts span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+.floating-hearts span:nth-child(3) { left: 35%; animation-delay: -3s; animation-duration: 15s; }
+.floating-hearts span:nth-child(5) { left: 65%; animation-delay: -1s; animation-duration: 13s; }
+.floating-hearts span:nth-child(7) { left: 90%; animation-delay: -4s; animation-duration: 11s; }
+.floating-hearts span:nth-child(9) { left: 70%; animation-delay: -5s; animation-duration: 14s; }
+
+/* Move stars: drift right */
+.floating-hearts span:nth-child(even) {
+  animation: floatDriftRight 14s ease-in-out infinite;
+}
+.floating-hearts span:nth-child(2) { left: 20%; animation-delay: -2s; animation-duration: 16s; }
+.floating-hearts span:nth-child(4) { left: 50%; animation-delay: -2.5s; animation-duration: 10s; }
+.floating-hearts span:nth-child(6) { left: 80%; animation-delay: -1.5s; animation-duration: 13s; }
+.floating-hearts span:nth-child(8) { left: 15%; animation-delay: -6s; animation-duration: 14s; }
+.floating-hearts span:nth-child(10) { left: 40%; animation-delay: -4.5s; animation-duration: 12s; }
+
+@keyframes floatDriftLeft {
+  0%, 100% {
+    transform: translate(0, 100vh) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.5;
+  }
+  92% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate(-15vw, -25vh) rotate(-380deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatDriftRight {
+  0%, 100% {
+    transform: translate(0, 100vh) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.5;
+  }
+  92% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate(12vw, -25vh) rotate(380deg);
+    opacity: 0;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.08); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.08); }
+  70% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(183, 28, 28, 0.4)); }
+  50% { filter: drop-shadow(0 0 24px rgba(183, 28, 28, 0.6)); }
+}
+
+@keyframes photoZoomFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes captionFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes photoFrameGlow {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(183, 28, 28, 0.15);
+  }
+  50% {
+    box-shadow: 0 12px 32px rgba(183, 28, 28, 0.25);
+  }
+}
+
+@keyframes photoImgBreathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
